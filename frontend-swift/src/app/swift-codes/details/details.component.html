@@ -14,7 +14,7 @@
     <h3>🏢 Branches:</h3>
     <ul>
       <li *ngFor="let branch of swiftCode.branches">
-        <strong>{{ branch.bankName }}</strong> 
+        {{ branch.bankName }} - {{branch.address}}
       </li>
     </ul>
   </div>

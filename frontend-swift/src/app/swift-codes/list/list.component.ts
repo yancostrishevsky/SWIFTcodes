@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ListComponent implements OnInit {
   swiftCodes: SwiftCode[] = [];
-  countryISO2: string = 'PL';
+  countryISO2: string = '';
 
   constructor(private swiftCodeService: SwiftCodeService, private router: Router) {}
 

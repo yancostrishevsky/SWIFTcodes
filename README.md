@@ -2,7 +2,7 @@
 
 ## 👤 About Me
 
-This project was developed using my preferred technology stack — TypeScript — as it is the language I use daily in my current job. However, I'm actively seeking opportunities to transition away from it. I'm highly motivated and eager to learn a new language such as **Go** from the ground up. Due to a high workload and time constraints, I wasn't able to spend as much time on refining the frontend design as I would have liked.
+This project was developed using my preferred technology stack TypeScript as it is the language I use daily in my current job. However, I'm actively seeking opportunities to transition away from it. I'm highly motivated and eager to learn a new language such as **Go** from the ground up. Due to a high workload and time constraints, I wasn't able to spend as much time on refining the frontend design as I would have liked.
 I’m aware that credentials like those in .env or .yml files should not be exposed, and under normal circumstances I would apply proper security practices. However, since these are purely example/demo values and not sensitive data, I’ve left them as-is to avoid spending extra time on unnecessary security hardening for this project.
 
 To improve performance and ensure scalability, several backend optimizations were introduced:
@@ -37,8 +37,8 @@ To improve performance and ensure scalability, several backend optimizations wer
 
 ### 1. Clone repo
 ```bash
-git clone https://github.com/your-u/swift-codes-directory.git
-cd swift-codes-directory
+git clone https://github.com/yancostrishevsky/SWIFTcodes.git
+cd SWIFTcodes
 ```
 
 ### 2. Start full stack
@@ -58,6 +58,25 @@ Tests are run automatically inside the `tests` container, but you can also run t
 ```bash
 docker-compose run --rm tests
 ```
+
+---
+
+## ✅ What the Tests Cover
+
+The backend test suite, written in **Jest** and **Supertest**, validates all major API functionalities:
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /v1/swift-codes/:swiftCode` | Verifies retrieval of a valid SWIFT code entry |
+| `GET /v1/swift-codes/:swiftCode (404)` | Ensures proper handling of unknown SWIFT codes |
+| `GET /v1/swift-codes/country/:iso2` | Fetches all codes for a specified country |
+| `POST /v1/swift-codes` | Validates input and successfully creates new SWIFT entries |
+| `POST (missing fields)` | Confirms rejection of incomplete requests |
+| `DELETE /v1/swift-codes/:swiftCode` | Deletes a specific SWIFT code and confirms removal |
+| `DELETE again` | Validates 404 response when deleting an already-deleted code |
+| `GET HQ with branches` | If the code is a headquarter, ensures the `branches` array is returned |
+
+Each test creates and cleans up its data to maintain database consistency. Tests also include edge cases and assert on HTTP status codes, response structure, and field presence.
 
 ---
 

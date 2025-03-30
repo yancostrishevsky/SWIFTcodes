@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: swiftcodes
+      POSTGRES_USER: gromdzio
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/db-init/swift_parsed.csv:/docker-entrypoint-initdb.d/swift_parsed.csv
+
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: gromdzio
+      DB_PASS: password
+      DB_NAME: swiftcodes
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./frontend-swift
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  tests:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: gromdzio
+      DB_PASS: password
+      DB_NAME: swiftcodes
+      NODE_ENV: test
+    command: npm test

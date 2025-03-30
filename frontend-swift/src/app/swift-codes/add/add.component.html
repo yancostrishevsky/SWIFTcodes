@@ -1,0 +1,47 @@
+<h2>➕ Add New SWIFT Code</h2>
+
+<form [formGroup]="swiftForm" (ngSubmit)="addSwiftCode()">
+  <label>
+    SWIFT Code:
+    <input formControlName="swiftCode" type="text" required>
+    <span *ngIf="swiftForm.get('swiftCode')?.invalid && swiftForm.get('swiftCode')?.touched">
+      ❌ SWIFT Code must be 8-11 uppercase letters or digits.
+    </span>
+  </label>
+
+  <label>
+    Bank Name:
+    <input formControlName="bankName" type="text" required>
+    <span *ngIf="swiftForm.get('bankName')?.invalid && swiftForm.get('bankName')?.touched">
+      ❌ Bank Name is required.
+    </span>
+  </label>
+
+  <label>
+    Address:
+    <input formControlName="address" type="text">
+  </label>
+
+  <label>
+    Country ISO2:
+    <input formControlName="countryISO2" type="text" required>
+    <span *ngIf="swiftForm.get('countryISO2')?.invalid && swiftForm.get('countryISO2')?.touched">
+      ❌ Country Code must be exactly 2 uppercase letters.
+    </span>
+  </label>
+
+  <label>
+    Country Name:
+    <input formControlName="countryName" type="text" required>
+    <span *ngIf="swiftForm.get('countryName')?.invalid && swiftForm.get('countryName')?.touched">
+      ❌ Country Name is required.
+    </span>
+  </label>
+
+  <label>
+    Is Headquarter?
+    <input formControlName="isHeadquarter" type="checkbox">
+  </label>
+
+  <button type="submit" [disabled]="swiftForm.invalid">Submit</button>
+</form>

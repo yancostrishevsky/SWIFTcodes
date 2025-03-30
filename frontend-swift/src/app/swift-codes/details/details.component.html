@@ -1,0 +1,22 @@
+<h2>📄 SWIFT Code Details</h2>
+
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="swiftCode && !isLoading">
+  <p><strong>SWIFT Code:</strong> {{ swiftCode.swiftCode }}</p>
+  <p><strong>Bank:</strong> {{ swiftCode.bankName }}</p>
+  <p><strong>Address:</strong> {{ swiftCode.address }}</p>
+  <p><strong>Country:</strong> {{ swiftCode.countryName }} ({{ swiftCode.countryISO2 }})</p>
+  <p><strong>Is Headquarter:</strong> {{ swiftCode.isHeadquarter ? 'Yes' : 'No' }}</p>
+
+  <div *ngIf="swiftCode.isHeadquarter && swiftCode.branches?.length">
+    <h3>🏢 Branches:</h3>
+    <ul>
+      <li *ngFor="let branch of swiftCode.branches">
+        <strong>{{ branch.bankName }}</strong> 
+      </li>
+    </ul>
+  </div>
+  <button (click)="goBack()">Back to list</button>
+</div>

@@ -1,0 +1,41 @@
+<h2>📜 SWIFT Codes for {{ countryISO2 }}</h2>
+
+<!-- Wyszukiwarka kodów SWIFT -->
+<div>
+  <label>
+    Country ISO2:
+    <input [(ngModel)]="countryISO2" placeholder="Enter Country ISO2" maxlength="2">
+  </label>
+  <button (click)="loadISOCodes()">🔍 Search</button>
+</div>
+
+<!-- Wyszukiwarka szczegółów konkretnego SWIFT Code -->
+<div>
+  <label>
+    SWIFT Code:
+    <input #swiftCodeInput type="text" placeholder="Enter SWIFT Code">
+  </label>
+  <button (click)="goToDetails(swiftCodeInput.value)">Get Details</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>SWIFT Code</th>
+      <th>Bank Name</th>
+      <th>City</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let code of swiftCodes">
+      <td>{{ code.swiftCode }}</td>
+      <td>{{ code.bankName }}</td>
+      <td>{{ code.address }}</td>
+      <td>
+        <button (click)="goToDetails(code.swiftCode)">Details</button>
+        <button (click)="deleteSwiftCode(code.swiftCode)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
